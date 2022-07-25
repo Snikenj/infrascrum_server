@@ -12,14 +12,14 @@ const createProject = async (req:Request, res:Response) => {
   res.status(201).json({ project });
 };
 
-const findProjectById = async (req:Request, res:Response) => {
-  const { id } = req.params;
-  return res.json({ project: await projectRepository.find(id) }); //! Trouver ID
-};
+// const findProjectById = async (req:Request, res:Response) => {
+//   const { id } = req.params;
+//   return res.json({ project: await projectRepository.find(id) }); //! Trouver ID
+// };
 
 const deleteProjectById = async (req:Request, res:Response) => {
   const { id } = req.params;
   return res.json({ project: projectRepository.softDelete(id) });
 };
 
-export { createProject, findAllProjects, findProjectById, deleteProjectById };
+export { createProject, findAllProjects, deleteProjectById };
