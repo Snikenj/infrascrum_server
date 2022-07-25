@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "ESNext"
+        ],
+        "strict": true,
+        "target": "ESNext",
+        "moduleResolution": "node",
+        "module": "ESNext",
+        "allowSyntheticDefaultImports": true,
+        "emitDecoratorMetadata": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "experimentalDecorators": true,
+        "declaration": true,
+        "outDir": "./dist",
+        "forceConsistentCasingInFileNames": true
+    },
+    "exclude": [
+        "dist//*",
+        "node_modules//*"
+    ]
+}
