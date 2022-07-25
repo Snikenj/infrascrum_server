@@ -23,4 +23,3 @@ const deleteProjectById = async (req: Request, res: Response) => {
 };
 
 export { createProject, findAllProjects, deleteProjectById };
-// findProjectById,
