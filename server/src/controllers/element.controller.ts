@@ -4,7 +4,8 @@ import { elementRepository } from '../application.database.js';
 import type { Element } from '../models/element.model.js';
 
 const findAllElements = async (req:Request, res:Response) => {
-  return res.json({ elements: await elementRepository.find() });
+  const elements = await elementRepository.find();
+  return res.json({ elements });
 };
 
 const createElement = async (req:Request, res:Response) => {

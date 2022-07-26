@@ -3,7 +3,8 @@ import { taskRepository } from '../application.database.js';
 import type { Task } from '../models/task.model.js';
 
 const findAllTasks = async (req:Request, res:Response) => {
-  return res.json({ tasks: await taskRepository.find() });
+  const tasks = await taskRepository.find();
+  return res.json({ tasks });
 };
 
 const createTask = async (req:Request, res:Response) => {

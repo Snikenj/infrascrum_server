@@ -1,8 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne } from 'typeorm';
 import { BaseModel } from './base.model.js';
 import type { Comment } from './comment.model.js';
 import type { Project } from './project.model.js';
 import type { Role } from './role.model.js';
+import { compare, hash } from 'bcrypt';
 
 @Entity('users')
 class User extends BaseModel {
@@ -40,6 +41,16 @@ class User extends BaseModel {
 
     @Column()
     public image?:string;
+
+    @BeforeInsert()
+    async hashPassword () {
+      const hashed = await hash(this.password, 10);
+      this.password = hashed;
+    }
+
+    public verifyPassword (password: string): Promise<boolean> {
+      return compare(password, this.password);
+    }
 
     @OneToOne('Role', 'user')
     @JoinColumn()
