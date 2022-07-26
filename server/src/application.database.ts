@@ -4,10 +4,12 @@ import type { Repository } from 'typeorm';
 import type { User } from './models/user.model.js';
 import type { Project } from './models/project.model.js';
 import type { Element } from './models/element.model.js';
+import type { Task } from './models/task.model.js';
 let dbIsRunning = false;
 let userRepository : Repository<User>;
 let projectRepository : Repository<Project>;
 let elementRepository : Repository<Element>;
+let taskRepository : Repository<Task>;
 async function initDatabase () {
   const connection = new DataSource({
     username: 'root',
@@ -29,4 +31,4 @@ async function initDatabase () {
   }
 };
 
-export { initDatabase, dbIsRunning, userRepository, projectRepository, elementRepository };
+export { initDatabase, dbIsRunning, userRepository, projectRepository, elementRepository, taskRepository };

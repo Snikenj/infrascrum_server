@@ -1,25 +1,34 @@
 /* eslint-disable no-console */
 import type { Request, Response } from 'express';
 import { elementRepository } from '../application.database.js';
+import type { Element } from '../models/element.model.js';
 
-const findAllProjects = async (req:Request, res:Response) => {
-  return res.json({ projects: await elementRepository.find() });
+const findAllElements = async (req:Request, res:Response) => {
+  return res.json({ elements: await elementRepository.find() });
 };
 
-const createProject = async (req:Request, res:Response) => {
-  const project = elementRepository.create(req.body);
-  await elementRepository.save(project);
-  res.status(201).json({ project });
+const createElement = async (req:Request, res:Response) => {
+  const element = elementRepository.create(req.body);
+  await elementRepository.save(element);
+  res.status(201).json({ element });
 };
 
-const findProjectById = async (req:Request, res:Response) => {
+const updateElementById = async (req:Request, res:Response) => {
   const { id } = req.params;
-  return res.json({ project: await elementRepository.find(id) }); //! Trouver ID
+  const element = await elementRepository.findOneBy({ id: parseInt(id) });
+  if (element === undefined) {
+    throw new Error('Element not found');
+  } else {
+    const mergedElement = elementRepository.merge(element as Element, req.body);
+    await elementRepository.save(mergedElement);
+
+    res.json({ element: mergedElement });
+  }
 };
 
-const deleteProjectById = async (req:Request, res:Response) => {
+const deleteElementById = async (req:Request, res:Response) => {
   const { id } = req.params;
-  return res.json({ project: elementRepository.softDelete(id) });
+  return res.json({ element: elementRepository.softDelete(id) });
 };
 
-export { createProject, findAllProjects, findProjectById, deleteProjectById };
+export { createElement, findAllElements, deleteElementById, updateElementById };
