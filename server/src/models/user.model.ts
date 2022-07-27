@@ -24,6 +24,7 @@ class User extends BaseModel {
     @Column({
       nullable: false,
       length: 20,
+      unique: true,
     })
     public username!:string;
 

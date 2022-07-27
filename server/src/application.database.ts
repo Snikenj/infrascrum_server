@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
 import { DataSource } from 'typeorm';
 import type { Repository } from 'typeorm';
-import type { User } from './models/user.model.js';
-import type { Project } from './models/project.model.js';
-import type { Element } from './models/element.model.js';
-import type { Task } from './models/task.model.js';
+import { User } from './models/user.model.js';
+import { Project } from './models/project.model.js';
+import { Element } from './models/element.model.js';
+import { Task } from './models/task.model.js';
 let dbIsRunning = false;
 let userRepository : Repository<User>;
 let projectRepository : Repository<Project>;
@@ -24,6 +24,10 @@ async function initDatabase () {
 
   try {
     await connection.initialize();
+    userRepository = connection.getRepository(User);
+    projectRepository = connection.getRepository(Project);
+    elementRepository = connection.getRepository(Element);
+    taskRepository = connection.getRepository(Task);
     dbIsRunning = true;
     console.log('Connecté à la base de données');
   } catch (e) {

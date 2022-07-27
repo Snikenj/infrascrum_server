@@ -4,7 +4,6 @@ import { projectRepository } from '../application.database.js';
 import type { Project } from '../models/project.model.js';
 
 const findAllProjects = async (req: Request, res: Response) => {
-  console.log(projectRepository);
   const projects = await projectRepository.find();
   return res.json({ projects });
 }; //! Filtrer sur les projets de l'utilisateur (à implémenter)!!

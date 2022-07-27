@@ -5,7 +5,7 @@ import { validate } from '../validators/base.validator.js';
 import { getProjectValidationRules } from '../validators/project.validator.js';
 
 const apiProjectRouter:Router = Router();
-apiProjectRouter.post('/projects', getProjectValidationRules(), validate, catchErrors(createProject)); //! A vérifier également
+apiProjectRouter.post('/project', getProjectValidationRules(), validate, catchErrors(createProject)); //! A vérifier également
 apiProjectRouter.get('/projects', catchErrors(findAllProjects));
 apiProjectRouter.get('/projects/:id', catchErrors(findProjectById));
 apiProjectRouter.patch('/projects/:id', catchErrors(updateProjectById)); //! p-e ajouter les règles de validation

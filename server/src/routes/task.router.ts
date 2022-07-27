@@ -8,7 +8,7 @@ const apiTaskRouter:Router = Router();
 
 apiTaskRouter.post('/task', getTaskValidationRules(), validate, catchErrors(createTask));
 apiTaskRouter.get('/tasks', catchErrors(findAllTasks));
-apiTaskRouter.patch('/task/:id', catchErrors(updateTaskById)); //! p-e ajouter les règles de validation
-apiTaskRouter.delete('/task/:id', catchErrors(deleteTaskById));
+apiTaskRouter.patch('/tasks/:id', catchErrors(updateTaskById)); //! p-e ajouter les règles de validation
+apiTaskRouter.delete('/tasks/:id', catchErrors(deleteTaskById));
 
 export { apiTaskRouter };

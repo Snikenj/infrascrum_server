@@ -6,7 +6,7 @@ const { sign } = pkg;
 const login = async (req:Request, res:Response, next:NextFunction) => {
   const user = await userRepository!.findOne({
     where: {
-      email: req.body.email,
+      username: req.body.username,
     },
     select: ['id', 'password'],
   });
@@ -15,13 +15,13 @@ const login = async (req:Request, res:Response, next:NextFunction) => {
       {
         exp:
               Math.floor(Date.now() / 1000) +
-              60 * parseInt('1'),
+              60 * parseInt(process.env.JWT_EXP || '1'),
         data: user.id,
       },
-      'infrascrum',
+      process.env.JWT_SECRET || 'infrascrum',
     );
-    // eslint-disable-next-line no-console
-    return res.json(jwtToken);
+
+    return res.json({ access_token: jwtToken, user_id: user.id });
   }
   const err = new Error() as HttpError;
   err.message = 'Bad credentials';
