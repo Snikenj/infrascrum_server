@@ -2,3 +2,4 @@ node_modules/
 dist/
 *.lock
 client
+.pnpm-debug.log
