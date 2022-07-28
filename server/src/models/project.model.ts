@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
 import { BaseModel } from './base.model.js';
 import type { Element } from './element.model.js';
 import type { User } from './user.model.js';
@@ -24,8 +24,7 @@ class Project extends BaseModel {
     @Column()
     public image?: string;
 
-    @ManyToMany('User', 'projects')
-    @JoinTable()
+    @ManyToOne('User', 'projects')
     public users?: User[];
 
   @OneToMany('Element', 'project')

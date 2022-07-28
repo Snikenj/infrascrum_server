@@ -1,4 +1,4 @@
-import { BeforeInsert, Column, Entity, JoinColumn, ManyToMany, OneToMany, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
 import { BaseModel } from './base.model.js';
 import type { Comment } from './comment.model.js';
 import type { Project } from './project.model.js';
@@ -57,7 +57,7 @@ class User extends BaseModel {
     @JoinColumn()
     public role!: Role[];
 
-    @ManyToMany('Project', 'users')
+    @OneToMany('Project', 'users')
     public projects!: Project[];
 
     @OneToMany('Comment', 'user')

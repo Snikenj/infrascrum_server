@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 import type { Request, Response } from 'express';
-import { projectRepository } from '../application.database.js';
+import { decode } from 'jsonwebtoken';
+import type { JwtPayload } from 'jsonwebtoken';
+import { projectRepository, userRepository } from '../application.database.js';
 import type { Project } from '../models/project.model.js';
 
 const findAllProjects = async (req: Request, res: Response) => {
@@ -9,6 +11,12 @@ const findAllProjects = async (req: Request, res: Response) => {
 }; //! Filtrer sur les projets de l'utilisateur (à implémenter)!!
 
 const createProject = async (req: Request, res: Response) => {
+  const token = req.headers.authorization!.split(' ')[1]; // ? OK
+  const userId = ((await decode(token) as JwtPayload).data); // ? OK
+  const users = await userRepository.findOneBy({ id: parseInt(req.body.users) }); //* Concerne les users assignés au projet
+  const admin = await userRepository.findOneBy({ id: userId }); // ? OK
+  req.body.user = admin; // ? OK
+  req.body.users = [users]; //* Concerne les users assignés au projet
   const project = projectRepository.create(req.body);
   await projectRepository.save(project);
   res.status(201).json({ project });
