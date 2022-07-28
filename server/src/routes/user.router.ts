@@ -5,6 +5,6 @@ import { validate } from '../validators/base.validator.js';
 import { getUserValidationRules } from '../validators/register.validator.js';
 
 const apiUserRouter:Router = Router();
-apiUserRouter.post('/register', getUserValidationRules(), validate, catchErrors(registerUser));
+apiUserRouter.post('/users', getUserValidationRules(), validate, catchErrors(registerUser));
 
 export { apiUserRouter };

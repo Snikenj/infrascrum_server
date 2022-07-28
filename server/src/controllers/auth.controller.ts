@@ -1,8 +1,10 @@
+/* eslint-disable no-console */
 import type { Request, Response, NextFunction } from 'express';
 import { userRepository } from '../application.database.js';
 import type { HttpError } from '../middlewares/error.middleware.js';
 import pkg from 'jsonwebtoken';
-const { sign } = pkg;
+// import type { JwtPayload } from 'jsonwebtoken';
+const { sign, verify } = pkg;
 const login = async (req:Request, res:Response, next:NextFunction) => {
   const user = await userRepository!.findOne({
     where: {
@@ -28,4 +30,39 @@ const login = async (req:Request, res:Response, next:NextFunction) => {
   err.status = 401;
   next(err);
 };
-export { login };
+
+const authorize = async (req:Request, res:Response, next:NextFunction) => {
+  try {
+    const jwtToken = req.headers.authorization?.split(' ')[1] || 'NO TOKEN';
+    await verify(jwtToken, process.env.JWT_SECRET || 'nojwt');
+    next();
+  } catch (e) {
+    const err = new Error('Bad token !!') as HttpError;
+    err.status = 401;
+    next(err);
+  }
+};
+
+// const authorizeForUser = async (req:Request, res:Response, next:NextFunction) => {
+//   // const { id } = req.params;
+//   try {
+//     const jwtToken = req.headers.authorization?.split(' ')[1] || 'NO TOKEN';
+//     const token = await decode(jwtToken) as JwtPayload;
+//     const userId = token.data;
+//     // const project = await projectRepository.findOne({ where: { id: parseInt(id) }, relations: { users: true } });
+//     // if (userId !== project?.users!.id) {
+//     if (userId !== userRepository) { //! C'est bon, mais pas pour le moment car on n'a pas la relation project - users, encore aucun user(s) ne sont assignés au projet.
+//       const err = new Error('Bad User !!') as HttpError;
+//       err.status = 401;
+//       next(err);
+//     }
+//     next();
+//   } catch (e) {
+//     console.log(e);
+//     const err = new Error('Bad token !!') as HttpError;
+//     err.status = 401;
+//     next(err);
+//   }
+// };
+
+export { login, authorize };

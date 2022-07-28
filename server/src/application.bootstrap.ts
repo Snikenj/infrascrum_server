@@ -1,6 +1,9 @@
 /* eslint-disable no-console */
+import { config } from 'dotenv';
 import { dbIsRunning, initDatabase } from './application.database.js';
 import { createApp } from './application.js';
+
+config({ path: 'variables.env' });
 
 export const initAPP = async () => {
   await initDatabase();
