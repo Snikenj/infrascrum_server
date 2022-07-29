@@ -40,7 +40,9 @@ class User extends BaseModel {
     })
     public lastname?:string;
 
-    @Column()
+    @Column({
+      nullable: true,
+    })
     public image?:string;
 
     @BeforeInsert()
