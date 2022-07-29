@@ -18,6 +18,7 @@ class User extends BaseModel {
       nullable: false,
       length: 1024,
       select: false,
+      unique: false,
     })
     public password!:string;
 
