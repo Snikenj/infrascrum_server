@@ -6,10 +6,10 @@ import { validate } from '../validators/base.validator.js';
 import { getProjectValidationRules } from '../validators/project.validator.js';
 
 const apiProjectRouter:Router = Router();
-apiProjectRouter.post('/projects', authorize, getProjectValidationRules(), validate, catchErrors(createProject)); //! A vérifier également
-apiProjectRouter.get('/projects', authorize, catchErrors(findAllProjects));
-apiProjectRouter.get('/projects/:id', authorize, catchErrors(findProjectById));
-apiProjectRouter.patch('/projects/:id', authorize, catchErrors(updateProjectById)); //! p-e ajouter les règles de validation
-apiProjectRouter.delete('/projects/:id', authorize, catchErrors(deleteProjectById)); //! Route à vérifier car générale
+apiProjectRouter.post('/projects', validate, authorize, getProjectValidationRules(), catchErrors(createProject)); //! A vérifier également
+apiProjectRouter.get('/projects', authorize, validate, catchErrors(findAllProjects));
+apiProjectRouter.get('/projects/:id', authorize, validate, catchErrors(findProjectById));
+apiProjectRouter.patch('/projects/:id', authorize, validate, catchErrors(updateProjectById)); //! p-e ajouter les règles de validation
+apiProjectRouter.delete('/projects/:id', authorize, validate, catchErrors(deleteProjectById)); //! Route à vérifier car générale
 
 export { apiProjectRouter };

@@ -9,10 +9,10 @@ class Element extends BaseModel {
       nullable: false,
       length: 20,
     })
-  public name!: string;
+  public nameElement!: string;
 
     @Column()
-    public color!: string;
+    public colorElement!: string;
 
   @ManyToOne('Project', 'elements')
   @JoinColumn()

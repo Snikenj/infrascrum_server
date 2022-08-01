@@ -9,7 +9,7 @@ const findAllElements = async (req:Request, res:Response) => {
 };
 
 const createElement = async (req:Request, res:Response) => {
-  const element = elementRepository.create(req.body);
+  const element = elementRepository.create(req.body.element);
   await elementRepository.save(element);
   res.status(201).json({ element });
 };

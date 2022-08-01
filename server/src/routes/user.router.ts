@@ -6,7 +6,7 @@ import { validate } from '../validators/base.validator.js';
 // import { getUserValidationRules } from '../validators/register.validator.js';
 
 const apiUserRouter:Router = Router();
-apiUserRouter.post('/users', authorize, validate, catchErrors(registerUser));
+apiUserRouter.post('/users', validate, catchErrors(registerUser));
 apiUserRouter.get('/users', authorize, validate, catchErrors(findAllUsers));
 apiUserRouter.get('/users/:id', authorize, validate, catchErrors(findUserById));
 apiUserRouter.patch('/users/:id', authorize, validate, catchErrors(updateUserById));
