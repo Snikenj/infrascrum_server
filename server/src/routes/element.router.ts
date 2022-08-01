@@ -6,7 +6,7 @@ import { getElementValidationRules } from '../validators/element.validator.js';
 
 const apiElementRouter:Router = Router();
 
-apiElementRouter.post('/element', getElementValidationRules(), validate, catchErrors(createElement));
+apiElementRouter.post('/elements', getElementValidationRules(), validate, catchErrors(createElement));
 apiElementRouter.get('/elements', catchErrors(findAllElements));
 apiElementRouter.patch('/elements/:id', catchErrors(updateElementById)); //! p-e ajouter les règles de validation
 apiElementRouter.delete('/elements/:id', catchErrors(deleteElementById));

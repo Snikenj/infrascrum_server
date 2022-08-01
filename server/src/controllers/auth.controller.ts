@@ -22,7 +22,7 @@ const login = async (req:Request, res:Response, next:NextFunction) => {
       },
       process.env.JWT_SECRET || 'infrascrum',
     );
-
+    console.log({ access_token: jwtToken, user_id: user.id });
     return res.json({ access_token: jwtToken, user_id: user.id });
   }
   const err = new Error() as HttpError;
