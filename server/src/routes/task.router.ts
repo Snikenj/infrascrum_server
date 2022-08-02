@@ -7,7 +7,7 @@ import { getTaskValidationRules } from '../validators/task.validator.js';
 
 const apiTaskRouter:Router = Router();
 
-apiTaskRouter.post('/tasks', authorize, validate, getTaskValidationRules(), catchErrors(createTask));
+apiTaskRouter.post('/tasks', authorize, getTaskValidationRules(), validate, catchErrors(createTask));
 apiTaskRouter.get('/tasks', authorize, validate, catchErrors(findAllTasks));
 apiTaskRouter.patch('/tasks/:id', authorize, validate, catchErrors(updateTaskById));
 apiTaskRouter.delete('/tasks/:id', authorize, validate, catchErrors(deleteTaskById));
