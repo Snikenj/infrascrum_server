@@ -16,7 +16,7 @@ class Project extends BaseModel {
     public startDate!: Date;
 
     @Column()
-    public finishDate!: Date;
+    public endDate!: Date;
 
     @Column()
     public description?: string;
