@@ -7,10 +7,15 @@ import type { User } from './user.model.js';
 class Project extends BaseModel {
     @Column({
       nullable: false,
+    })
+  public admin!: number;
+
+    @Column({
+      nullable: false,
       length: 50,
       unique: true,
     })
-  public projectName!: string;
+    public projectName!: string;
 
     @Column()
     public startDate!: Date;
