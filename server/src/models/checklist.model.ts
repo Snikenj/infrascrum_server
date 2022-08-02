@@ -15,7 +15,7 @@ class Checklist extends BaseModel {
 
     @ManyToOne('Task', 'checklists')
     @JoinColumn()
-    public task!: Task;
+    public task?: Task;
 }
 
 export { Checklist };

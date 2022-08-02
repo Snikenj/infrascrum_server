@@ -5,11 +5,14 @@ import { User } from './models/user.model.js';
 import { Project } from './models/project.model.js';
 import { Element } from './models/element.model.js';
 import { Task } from './models/task.model.js';
+import { Checklist } from './models/checklist.model.js';
+
 let dbIsRunning = false;
 let userRepository : Repository<User>;
 let projectRepository : Repository<Project>;
 let elementRepository : Repository<Element>;
 let taskRepository : Repository<Task>;
+let checkRepository : Repository<Checklist>;
 async function initDatabase () {
   const connection = new DataSource({
     username: 'root',
@@ -28,6 +31,7 @@ async function initDatabase () {
     projectRepository = connection.getRepository(Project);
     elementRepository = connection.getRepository(Element);
     taskRepository = connection.getRepository(Task);
+    checkRepository = connection.getRepository(Checklist);
     dbIsRunning = true;
     console.log('Connecté à la base de données');
   } catch (e) {
@@ -35,4 +39,4 @@ async function initDatabase () {
   }
 };
 
-export { initDatabase, dbIsRunning, userRepository, projectRepository, elementRepository, taskRepository };
+export { initDatabase, dbIsRunning, userRepository, projectRepository, elementRepository, taskRepository, checkRepository };

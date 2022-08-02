@@ -22,11 +22,10 @@ const login = async (req:Request, res:Response, next:NextFunction) => {
       },
       process.env.JWT_SECRET || 'infrascrum',
     );
-    console.log({ access_token: jwtToken, user_id: user.id });
     return res.json({ access_token: jwtToken, user_id: user.id });
   }
   const err = new Error() as HttpError;
-  err.message = 'Bad credentials';
+  err.message = 'Bad credentials.';
   err.status = 401;
   next(err);
 };
@@ -37,32 +36,10 @@ const authorize = async (req:Request, res:Response, next:NextFunction) => {
     await verify(jwtToken, process.env.JWT_SECRET || 'nojwt');
     next();
   } catch (e) {
-    const err = new Error('Bad token !!') as HttpError;
+    const err = new Error('Invalid token.') as HttpError;
     err.status = 401;
     next(err);
   }
 };
-
-// const authorizeForUser = async (req:Request, res:Response, next:NextFunction) => {
-//   // const { id } = req.params;
-//   try {
-//     const jwtToken = req.headers.authorization?.split(' ')[1] || 'NO TOKEN';
-//     const token = await decode(jwtToken) as JwtPayload;
-//     const userId = token.data;
-//     // const project = await projectRepository.findOne({ where: { id: parseInt(id) }, relations: { users: true } });
-//     // if (userId !== project?.users!.id) {
-//     if (userId !== userRepository) { //! C'est bon, mais pas pour le moment car on n'a pas la relation project - users, encore aucun user(s) ne sont assignés au projet.
-//       const err = new Error('Bad User !!') as HttpError;
-//       err.status = 401;
-//       next(err);
-//     }
-//     next();
-//   } catch (e) {
-//     console.log(e);
-//     const err = new Error('Bad token !!') as HttpError;
-//     err.status = 401;
-//     next(err);
-//   }
-// };
 
 export { login, authorize };

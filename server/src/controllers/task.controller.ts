@@ -8,8 +8,6 @@ const findAllTasks = async (req:Request, res:Response) => {
 };
 
 const createTask = async (req:Request, res:Response) => {
-  // const elementId = req.body
-  // const { id } = elementId;
   const task = taskRepository.create(req.body);
   await taskRepository.save(task);
   res.status(201).json(task);

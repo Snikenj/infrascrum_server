@@ -7,6 +7,7 @@ import { apiProjectRouter } from './routes/project.router.js';
 import { apiTaskRouter } from './routes/task.router.js';
 import { apiUserRouter } from './routes/user.router.js';
 import { apiAuthRouter } from './routes/auth.router.js';
+import { apiCheckRouter } from './routes/checklist.router.js';
 
 const createApp = ():express.Application => {
   const app = express();
@@ -18,6 +19,7 @@ const createApp = ():express.Application => {
   app.use(apiProjectRouter);
   app.use(apiElementRouter);
   app.use(apiTaskRouter);
+  app.use(apiCheckRouter);
   app.use(notFound);
   app.use(appError);
   return app;

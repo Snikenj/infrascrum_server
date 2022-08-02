@@ -27,16 +27,6 @@ const updateElementById = async (req:Request, res:Response) => {
   }
 };
 
-// const findElementById = async (req:Request, res:Response) => {
-//   const { id } = req.params;
-//   const element = await elementRepository.findOneBy({ id: parseInt(id) });
-//   if (element === undefined) {
-//     throw new Error('Element not found');
-//   } else {
-//     return ();
-//   };
-// };
-
 const deleteElementById = async (req:Request, res:Response) => {
   const { id } = req.params;
   return res.json(elementRepository.softDelete(id));

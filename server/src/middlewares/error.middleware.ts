@@ -17,7 +17,6 @@ const notFound = (req:Request, res:Response, next:NextFunction) => {
 };
 
 const appError = (err:any, req:Request, res:Response, next: NextFunction) => {
-  // console.log(err);
   res.status(err.status || 500);
   res.json({
     error: {
