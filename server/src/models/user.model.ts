@@ -1,8 +1,8 @@
-import { BeforeInsert, Column, Entity, JoinColumn, OneToMany, OneToOne } from 'typeorm';
+import { BeforeInsert, Column, Entity, ManyToMany, OneToMany } from 'typeorm';
 import { BaseModel } from './base.model.js';
 import type { Comment } from './comment.model.js';
 import type { Project } from './project.model.js';
-import type { Role } from './role.model.js';
+// import type { Role } from './role.model.js';
 import { compare, hash } from 'bcrypt';
 
 @Entity('users')
@@ -56,12 +56,15 @@ class User extends BaseModel {
       return compare(password, this.password);
     }
 
-    @OneToOne('Role', 'user')
-    @JoinColumn()
-    public role!: Role[];
+    // @OneToOne('Role', 'user')
+    // @JoinColumn()
+    // public role!: Role[];
 
-    @OneToMany('Project', 'users')
+    @ManyToMany('Project', 'users')
     public projects!: Project[];
+
+    @OneToMany('Project', 'admin')
+    public projects_admins!: Project[];
 
     @OneToMany('Comment', 'user')
     public comments!: Comment;

@@ -1,6 +1,6 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { BaseModel } from './base.model.js';
-import type { User } from './user.model.js';
+// import type { User } from './user.model.js';
 
 @Entity('roles')
 class Role extends BaseModel {
@@ -10,9 +10,9 @@ class Role extends BaseModel {
     })
   public role!: string;
 
-  @OneToOne('User', 'role')
-  @JoinColumn()
-    public user!: User;
+  // @OneToOne('User', 'role')
+  // @JoinColumn()
+  //   public user!: User;
 }
 
 export { Role };

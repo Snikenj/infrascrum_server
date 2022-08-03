@@ -1,21 +1,21 @@
-import { Column, Entity, ManyToOne, OneToMany } from 'typeorm';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany } from 'typeorm';
 import { BaseModel } from './base.model.js';
 import type { Element } from './element.model.js';
 import type { User } from './user.model.js';
 
 @Entity('projects')
 class Project extends BaseModel {
-    @Column({
-      nullable: false,
-    })
-  public admin!: number;
+  //   @Column({
+  //     nullable: false,
+  //   })
+  // public admin!: number;
 
     @Column({
       nullable: false,
       length: 50,
       unique: true,
     })
-    public projectName!: string;
+  public projectName!: string;
 
     @Column()
     public startDate!: Date;
@@ -29,8 +29,12 @@ class Project extends BaseModel {
     @Column()
     public image?: string;
 
-    @ManyToOne('User', 'projects')
+    @ManyToMany('User', 'projects')
+    @JoinTable()
     public users?: User[];
+
+    @ManyToOne('User', 'projects_admins')
+    public admin?: User[];
 
   @OneToMany('Element', 'project')
     public elements?: Element[];

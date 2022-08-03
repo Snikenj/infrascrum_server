@@ -2,6 +2,7 @@
 import type { Request, Response } from 'express';
 import { projectRepository } from '../application.database.js';
 import type { Project } from '../models/project.model.js';
+// import { createQueryBuilder } from 'typeorm';
 
 const findAllProjects = async (req: Request, res: Response) => {
   const projects = await projectRepository.find();
@@ -36,4 +37,4 @@ const deleteProjectById = async (req: Request, res: Response) => {
   return res.json(projectRepository.softDelete(id));
 };
 
-export { createProject, findAllProjects, deleteProjectById, updateProjectById, findProjectById };
+export { createProject, updateProjectById, findAllProjects, deleteProjectById, findProjectById };
