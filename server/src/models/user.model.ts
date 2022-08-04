@@ -63,6 +63,9 @@ class User extends BaseModel {
     @OneToMany('Project', 'users')
     public projects!: Project[];
 
+    @OneToMany('Project', 'admin')
+    public projects_admins!: Project[];
+
     @OneToMany('Comment', 'user')
     public comments!: Comment;
 }
