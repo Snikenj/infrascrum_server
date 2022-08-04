@@ -30,11 +30,19 @@ const updateProjectById = async (req:Request, res:Response) => {
 const findProjectById = async (req:Request, res:Response) => {
   const projectsDetaMere = await projectRepository
     .createQueryBuilder('project')
+    .select()
     .where('project.id = :id', { id: req.params.id })
     .leftJoinAndSelect('project.elements', 'elements')
     .leftJoinAndSelect('elements.tasks', 'tasks')
     .getOne();
-  return res.json(projectsDetaMere);
+  // console.log(projectsDetaMere?.elements);
+  // const bigArray = projectsDetaMere?.elements;
+  // if (bigArray) {
+  //   const filterArray = bigArray.map(x => x.id);
+  //   console.log(filterArray);
+  //   return res.json(filterArray);
+  // }
+  return res.json({ projectsDetaMere });
 };
 
 const deleteProjectById = async (req: Request, res: Response) => {
