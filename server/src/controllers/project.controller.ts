@@ -35,14 +35,14 @@ const findProjectById = async (req:Request, res:Response) => {
     .leftJoinAndSelect('project.elements', 'elements')
     .leftJoinAndSelect('elements.tasks', 'tasks')
     .getOne();
-  // console.log(projectsDetaMere?.elements);
+  // console.log(projectsDetaMere?.elements); //? Permet de renvoyer un tableau d'element_id
   // const bigArray = projectsDetaMere?.elements;
   // if (bigArray) {
   //   const filterArray = bigArray.map(x => x.id);
   //   console.log(filterArray);
   //   return res.json(filterArray);
   // }
-  return res.json({ projectsDetaMere });
+  return res.json(projectsDetaMere);
 };
 
 const deleteProjectById = async (req: Request, res: Response) => {
